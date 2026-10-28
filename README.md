@@ -58,7 +58,7 @@ python examples/python/main.py --date 1990-07-15 --lunar --gender female
 - **응답**: 성공 `{"success": true, "data": {...}}`, 실패 `{"success": false, "statusCode": ..., "message": ..., "timestamp": ...}`. `code`는 일부 오류(예: `INVALID_LOCATION`)에만 붙어요. 분기는 `statusCode`로, `code`는 있을 때만
 - **천간·지지**: `data.wonkuk.year|month|day|hour`의 `stem`·`branch`(한글)와 `stemHanja`·`branchHanja`(한자). 일주의 천간이 일간
 - **시간 미상**: `hour`·`minute`를 빼고 보내면 `wonkuk.hour`가 `null`, `birthHour.known === false` (시간을 보내면 `birthHour`는 `null`). 정오 같은 값을 넣어 보내지 마세요
-- **음력**: 없는 윤달·없는 날짜는 400 (`code` 없음). 변환 결과는 `lunarInput.solarDate`
+- **음력**: 없는 윤달·없는 날짜는 400 + `code: "INVALID_LUNAR_DATE"`. 변환 결과는 `lunarInput.solarDate`
 - **타임존**: `timezone`은 필수. 인식 못 하는 이름이면 성공 응답의 `data.warnings`에 `{ "code": "UNKNOWN_TIMEZONE", "field": "timezone" }`이 붙어요
 - **진태양시·자시**: `birthLatitude`·`birthLongitude`(또는 `country`), `zaSiRule`, `birthTimePrecision` 옵션은 레퍼런스 참고
 - **저장해서 다시 쓰기**: 같은 입력이면 결과가 같아요. 성공한 요청은 매번 과금되니 첫 응답을 저장해 두고 다시 쓰세요

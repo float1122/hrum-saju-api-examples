@@ -98,8 +98,7 @@ def main():
             print("API 키와 헤더 이름(X-Partner-Api-Key)을 확인해 주세요.", file=sys.stderr)
         if data.get("statusCode") == 402:
             print("크레딧이 부족해요. 콘솔에서 잔액을 확인해 주세요.", file=sys.stderr)
-        # A lunar date that does not exist is a plain 400 (no code).
-        if data.get("statusCode") == 400 and body.get("calendar") == "lunar":
+        if data.get("code") == "INVALID_LUNAR_DATE":
             print("그해에 없는 음력 날짜나 윤달일 수 있어요. 입력을 다시 확인해 주세요.", file=sys.stderr)
         # message is for humans/logs only (may be a string or a list).
         msg = data.get("message")

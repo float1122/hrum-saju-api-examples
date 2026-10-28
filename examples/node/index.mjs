@@ -83,8 +83,7 @@ async function main() {
     console.error(`요청 실패: ${json.statusCode ?? res.status} ${json.code ?? ''}`.trim());
     if (json.statusCode === 401) console.error('API 키와 헤더 이름(X-Partner-Api-Key)을 확인해 주세요.');
     if (json.statusCode === 402) console.error('크레딧이 부족해요. 콘솔에서 잔액을 확인해 주세요.');
-    // A lunar date that does not exist is a plain 400 (no code).
-    if (json.statusCode === 400 && body.calendar === 'lunar') console.error('그해에 없는 음력 날짜나 윤달일 수 있어요. 입력을 다시 확인해 주세요.');
+    if (json.code === 'INVALID_LUNAR_DATE') console.error('그해에 없는 음력 날짜나 윤달일 수 있어요. 입력을 다시 확인해 주세요.');
     // message is for humans/logs only (may be a string or an array).
     if (json.statusCode === 400 && json.message) console.error('상세:', [].concat(json.message).join(' / '));
     process.exit(1);
